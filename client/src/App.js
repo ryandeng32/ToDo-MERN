@@ -18,18 +18,32 @@ const App = () => {
   };
   return (
     <Fragment>
-      <h1>{today}</h1>
-      <ul>
+      <div className="box" id="heading">
+        <h1>{today}</h1>
+      </div>
+
+      <div className="box">
         {all.map((single) => (
-          <li key={single}>{single}</li>
+          <div className="item">
+            <input type="checkbox" />
+            <p>{single}</p>
+          </div>
         ))}
-      </ul>
-      <form onSubmit={submit}>
-        <div>
-          Enter Item: <input value={item} onChange={handleItem} />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+        <form className="item" onSubmit={submit}>
+          <div>
+            <input
+              type="text"
+              value={item}
+              onChange={handleItem}
+              placeholder="New Item"
+              autoComplete="off"
+            />
+            <button type="submit" name="button">
+              +
+            </button>
+          </div>
+        </form>
+      </div>
     </Fragment>
   );
 };
