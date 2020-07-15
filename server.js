@@ -1,12 +1,16 @@
 const express = require("express");
-const app = express();
-app.use(express.urlencoded({ extended: true }));
+const cors = require("cors");
 
+const app = express();
+app.use(express.json());
+app.use(cors());
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 app.post("/", (req, res) => {
-  console.log(req.body);
+  const item = req.body.item;
+  console.log(item);
+  res.send(item);
 });
 PORT = 5000;
 app.listen(PORT, () => {
