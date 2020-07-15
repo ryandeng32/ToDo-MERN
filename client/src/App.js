@@ -44,6 +44,8 @@ const App = () => {
           </div>
         </form>
       </div>
+
+      <footer>Ryan Deng</footer>
     </Fragment>
   );
 };
