@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -8,6 +8,9 @@ const App = () => {
   const [item, setItem] = useState("");
   const [all, setAll] = useState([]);
 
+  useEffect(() => {
+    axios.get("http://localhost:5000").then((res) => setAll(res.data));
+  }, []);
   const handleItem = (e) => setItem(e.target.value);
   const submit = (e) => {
     e.preventDefault();
@@ -15,6 +18,10 @@ const App = () => {
       .post("http://localhost:5000/", { item })
       .then((res) => setAll(all.concat(res.data)));
     setItem("");
+  };
+  const deleteItem = (id) => {
+    axios.delete(`http://localhost:5000/${id}`);
+    setAll(all.filter((single) => single._id !== id));
   };
   return (
     <Fragment>
@@ -24,9 +31,9 @@ const App = () => {
 
       <div className="box">
         {all.map((single) => (
-          <div className="item">
-            <input type="checkbox" />
-            <p>{single}</p>
+          <div className="item" key={single._id}>
+            <input onClick={() => deleteItem(single._id)} type="checkbox" />
+            <p>{single.name}</p>
           </div>
         ))}
         <form className="item" onSubmit={submit}>
