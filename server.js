@@ -1,4 +1,4 @@
-const config = require("config.json")("./config/default.json");
+const config = require("consfig.json")("./config/default.json");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
