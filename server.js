@@ -1,21 +1,15 @@
-const config = require("consfig.json")("./config/default.json");
+const config = require("config.json")("./config/default.json");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
 
-mongoose.connect(
-  process.env.MONGO_URI | config.mongoURI,
-  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-  mongoose.connection
-    .once("open", function () {
-      console.log("Connection has been made!");
-    })
-    .on("error", function (error) {
-      console.log("Error is: ", error);
-    })
-);
+mongoose.connect(process.env.MONGO_URI | config.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 
 const ItemSchema = {
   name: String,
