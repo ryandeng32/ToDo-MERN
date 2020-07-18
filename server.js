@@ -8,9 +8,13 @@ const app = express();
 mongoose.connect(
   process.env.MONGO_URI | config.mongoURI,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-  () => {
-    console.log("mongoDB connected...");
-  }
+  mongoose.connection
+    .once("open", function () {
+      console.log("Connection has been made!");
+    })
+    .on("error", function (error) {
+      console.log("Error is: ", error);
+    })
 );
 
 const ItemSchema = {
