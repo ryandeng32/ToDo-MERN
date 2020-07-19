@@ -9,18 +9,16 @@ const App = () => {
   const [all, setAll] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000").then((res) => setAll(res.data));
+    axios.get("/").then((res) => setAll(res.data));
   }, []);
   const handleItem = (e) => setItem(e.target.value);
   const submit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/", { item })
-      .then((res) => setAll(all.concat(res.data)));
+    axios.post("/", { item }).then((res) => setAll(all.concat(res.data)));
     setItem("");
   };
   const deleteItem = (id) => {
-    axios.delete(`http://localhost:5000/${id}`);
+    axios.delete(`/${id}`);
     setAll(all.filter((single) => single._id !== id));
   };
   return (
