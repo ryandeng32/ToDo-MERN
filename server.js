@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
 
-mongoose.connect(process.env.MONGO_URI | config.mongoURI, {
+mongoose.connect(process.env.MONGO_URI || config.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -71,7 +71,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-PORT = process.env.POST | 5000;
+PORT = process.env.POST || 5000;
 app.listen(PORT, () => {
   console.log(`Server started at port ${PORT}`);
 });
