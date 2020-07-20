@@ -31,7 +31,7 @@ const defaultItems = [item1, item2, item3];
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   Item.find({}, (err, foundItems) => {
     if (foundItems.length === 0) {
       Item.insertMany(defaultItems, (err) => {
@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/", (req, res) => {
+app.post("/api", (req, res) => {
   const itemName = req.body.item;
   const item = new Item({
     name: itemName,
@@ -56,7 +56,7 @@ app.post("/", (req, res) => {
   res.send(item);
 });
 
-app.delete("/:id", (req, res) => {
+app.delete("/api/:id", (req, res) => {
   Item.findByIdAndRemove(req.params.id, (err) => {
     if (!err) {
       res.send("Success");

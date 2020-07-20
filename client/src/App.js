@@ -9,16 +9,16 @@ const App = () => {
   const [all, setAll] = useState([]);
 
   useEffect(() => {
-    axios.get("/").then((res) => setAll(res.data));
+    axios.get("/api").then((res) => setAll(res.data));
   }, []);
   const handleItem = (e) => setItem(e.target.value);
   const submit = (e) => {
     e.preventDefault();
-    axios.post("/", { item }).then((res) => setAll(all.concat(res.data)));
+    axios.post("/api", { item }).then((res) => setAll(all.concat(res.data)));
     setItem("");
   };
   const deleteItem = (id) => {
-    axios.delete(`/${id}`);
+    axios.delete(`/api/${id}`);
     setAll(all.filter((single) => single._id !== id));
   };
   return (
